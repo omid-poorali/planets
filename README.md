@@ -1,13 +1,11 @@
 # Planets
 
----
-
 ### Prerequisites:
 
-- JavaScript runtime **[node.js][node]**;
-- **(OPTIONAL)** Alternative package manager:
-  - **[PNPM][pnpm]** `npm install --global pnpm` <br /> or
-  - **[Yarn][yarn]** `npm install --global yarn`
+- JavaScript runtime;
+-  Alternative package manager:
+  -  `npm install --global pnpm` <br /> or
+  -  `npm install --global yarn`
 
 - Open your terminal or code editor to the path your project is located, and run:
 
