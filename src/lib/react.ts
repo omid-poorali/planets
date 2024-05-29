@@ -16,7 +16,7 @@ export const React = {
 const myAppState = [];
 let myAppStateCursor = 0;
 
-export const useState = (initialState) => {
+export const useState = (initialState?) => {
   // get the cursor for this useState
   const stateCursor = myAppStateCursor;
   // Check before setting AppState to initialState (reRender)
@@ -50,6 +50,10 @@ export const renderMethod = (element, container) => {
     domElement_ = document.createTextNode(String(element));
     container.append(domElement_);
     // No children for text node so we return.
+    return;
+  }
+  if (Array.isArray(element)) {
+    for (const node of element) renderMethod(node, container);
     return;
   }
   // 1. First create the document node corresponding el
