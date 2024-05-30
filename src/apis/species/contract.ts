@@ -1,13 +1,13 @@
 import * as Models from "../../models";
 
 
-export type GetPlanetsRequest = {
-    page: string;
+export type GetSpeciesRequest = {
+    page: number;
 };
 
-export type GetPlanetsResponse = {
+export type GetSpeciesResponse = {
     count: number;
     next: string | null;
     previous: string | null;
-    results: Models.Planet[]
+    results: Models.Specie[]
 };

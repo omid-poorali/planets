@@ -1,1 +1,1 @@
-export * from './planets';
+export * from './species';

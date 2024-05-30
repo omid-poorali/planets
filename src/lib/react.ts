@@ -1,9 +1,10 @@
 // ---- Library --- //
 export const React = {
-  createElement: (tag, properties, ...children) => {
+  createElement: async (tag, properties, ...children) => {
     if (typeof tag === 'function') {
-      return tag(properties, ...children);
+      return await tag(properties, ...children)
     }
+
     return {
       tag,
       props: properties,
@@ -41,7 +42,9 @@ export const useState = (initialState?) => {
 };
 
 // ---- Library --- //
-export const renderMethod = (element, container) => {
+export const renderMethod = async (element, container) => {
+  if (element instanceof Promise) return await renderMethod(await element, container)
+
   let domElement_;
   // 0. Check the type of el
   //    if string we need to handle it like text node.
@@ -53,7 +56,7 @@ export const renderMethod = (element, container) => {
     return;
   }
   if (Array.isArray(element)) {
-    for (const node of element) renderMethod(node, container);
+    for (const node of element) await renderMethod(node, container);
     return;
   }
   // 1. First create the document node corresponding el
@@ -70,7 +73,7 @@ export const renderMethod = (element, container) => {
   if (element.children && element.children.length > 0) {
     // When child is rendered, the container will be
     // the domEl we created here.
-    for (const node of element.children) renderMethod(node, domElement_);
+    for (const node of element.children) await renderMethod(node, domElement_);
   }
   // 4. append the DOM node to the container.
   container.append(domElement_);
@@ -82,7 +85,9 @@ let rootElement;
 export const render = (element, container) => {
   rootElement = element;
   domElement = container;
-  renderMethod(React.createElement(rootElement, {}), domElement);
+  renderMethod(React.createElement(rootElement, {}), domElement).then(() => {
+    console.log("rendered successfully")
+  })
 };
 
 const reRender = () => {
@@ -92,5 +97,7 @@ const reRender = () => {
   // Reset the global state cursor
   myAppStateCursor = 0;
   // then render Fresh
-  renderMethod(React.createElement(rootElement, {}), domElement);
+  renderMethod(React.createElement(rootElement, {}), domElement).then(() => {
+    console.log("rendered successfully");
+  });
 };

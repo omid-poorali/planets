@@ -8,4 +8,4 @@ const getApis = () => {
   return real;
 };
 
-export const auth = getApis();
+export const species = getApis();
