@@ -1,10 +1,8 @@
-// ---- Library --- //
 export const React = {
   createElement: async (tag, properties, ...children) => {
     if (typeof tag === 'function') {
       return await tag(properties, ...children)
     }
-
     return {
       tag,
       props: properties,
@@ -13,7 +11,6 @@ export const React = {
   }
 };
 
-// ---- Library --- //
 const myAppState = [];
 let myAppStateCursor = 0;
 
@@ -41,9 +38,16 @@ export const useState = (initialState?) => {
   return [myAppState[stateCursor], setState];
 };
 
-// ---- Library --- //
 export const renderMethod = async (element, container) => {
-  if (element instanceof Promise) return await renderMethod(await element, container)
+  if (!element) return;
+  if (element instanceof Promise) {
+    await renderMethod(await element, container);
+    return;
+  }
+  if (Array.isArray(element)) {
+    for (const node of element) await renderMethod(node, container);
+    return;
+  }
 
   let domElement_;
   // 0. Check the type of el
@@ -55,10 +59,7 @@ export const renderMethod = async (element, container) => {
     // No children for text node so we return.
     return;
   }
-  if (Array.isArray(element)) {
-    for (const node of element) await renderMethod(node, container);
-    return;
-  }
+
   // 1. First create the document node corresponding el
   domElement_ = document.createElement(element.tag);
   // 2. Set the props on domEl
@@ -98,6 +99,6 @@ const reRender = () => {
   myAppStateCursor = 0;
   // then render Fresh
   renderMethod(React.createElement(rootElement, {}), domElement).then(() => {
-    console.log("rendered successfully");
-  });
+    console.log("rendered successfully")
+  })
 };

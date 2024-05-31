@@ -1,30 +1,49 @@
 @tailwind base;
 @tailwind components;
+
+// components
+@import "../components/Avatar/Avatar.scss";
+@import "../components/Spinner/Spinner.scss";
+
 @tailwind utilities;
 
-:root {
-  /*
-		https://tailwindcss.com/docs/customizing-colors
-	*/
-  --primary: #262626; /* neutral-800 */
-  --secondary: #171717; /* neutral-900 */
-  --tertiary: #404040; /* neutral-700 */
-  --color-dark: #303030;
-  --color-light: #f3f3f3;
-  --accent-primary: #2563eb; /* blue-600 */
-  --accent-primary-state: #1e40af; /* blue-800 */
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Thin'),
+        url('../assets/fonts/Roboto-Thin.woff2') format('woff2'),
+        url('../assets/fonts/Roboto-Thin.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
 }
 
-@layer base {
-  html,
-  body {
-    @apply h-full w-full;
-  }
-
-  body {
-    @apply bg-primary text-color-light;
-  }
-
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Regular'),
+        url('../assets/fonts/Roboto-Regular.woff2') format('woff2'),
+        url('../assets/fonts/Roboto-Regular.woff') format('woff');
+    font-weight: 400;
+    font-display: swap;
 }
 
-@import './fonts.scss';
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Medium'),
+        url('../assets/fonts/Roboto-Medium.woff2') format('woff2'),
+        url('../assets/fonts/Roboto-Medium.woff') format('woff');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto-Bold'),
+        url('../assets/fonts/Roboto-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Roboto-Bold.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
